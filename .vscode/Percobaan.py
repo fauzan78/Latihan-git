@@ -4,7 +4,7 @@ import os
 import subprocess
 import openai
 from AppOpener import open, close
-# Set OpenAI API key
+#for apikey
 openai.api_key = "0"
 
 
