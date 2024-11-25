@@ -70,6 +70,10 @@ def handle_command(command):
     elif "keluar" in command:
         speak("Sampai jumpa!")
         exit(0)
+    elif "who am i" in command or "siapa aku" in command or "siapa fauzan" in command:
+        speak("Fauzan is owner of lexa robot")
+    elif "who you are?" in command or "siapa kamu" in command:
+        speak("Lexa is robot who built by fauzan fajar pratama")
     else:
         prompt = command.replace("lexa", "").strip()
         response = chatbot_response(prompt)
@@ -79,9 +83,13 @@ def main():
     """Main function to handle commands."""
     speak("Lexa siap mendengarkan. Katakan 'Lexa' diikuti dengan perintah Anda.")
     while True:
+        global stop_speaking
         command = recognize_speech()
         if "lexa" in command:
             handle_command(command)
+        elif "stop" in command:
+        stop_speaking = True
+        speak("Baik, saya berhenti.")
         else:
             print("Kata kunci 'Lexa' tidak terdeteksi. Mengabaikan input.")
 
