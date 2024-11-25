@@ -3,7 +3,7 @@ import speech_recognition as sr
 import os
 import subprocess
 import openai
-from AppOpener import open
+from AppOpener import open, close
 # Set OpenAI API key
 openai.api_key = "0"
 
@@ -64,6 +64,9 @@ def handle_command(command):
     elif "open" in command:
         appname = command.replace("lexa open", "").strip()
         open(app_name, match_closest=True)
+    elif "close" in command:
+        appname = command.replace("lexa close", "").strip()
+        close(app_name, match_closest=True)
     elif "keluar" in command:
         speak("Sampai jumpa!")
         exit(0)
