@@ -88,8 +88,8 @@ def main():
         if "lexa" in command:
             handle_command(command)
         elif "stop" in command:
-        stop_speaking = True
-        speak("Baik, saya berhenti.")
+            stop_speaking = True
+            speak("Baik, saya berhenti.")
         else:
             print("Kata kunci 'Lexa' tidak terdeteksi. Mengabaikan input.")
 
