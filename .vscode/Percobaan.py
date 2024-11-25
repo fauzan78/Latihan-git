@@ -11,7 +11,35 @@ openai.api_key = "0"
 engine = pyttsx3.init()
 engine.setProperty("rate", 150)  # Kecepatan bicara
 engine.setProperty("volume", 0.9)  # Volume
-
+app_paths = {
+    "chrome": r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+    "valorant": r"C:\Riot Games\Riot Client\RiotClientServices.exe",
+    "notepad": r"C:\Windows\System32\notepad.exe",
+    "discord": r"C:\Users\Ozann\Desktop\Discord.lnk",
+    "spotify": r"C:\Users\Ozann\Desktop\Spotify.lnk",
+    "visual studio code": r"C:\Users\Ozann\Desktop\Visual Studio Code.lnk",
+    "letsvpn": r"C:\Users\Ozann\Desktop\LetsVPN.lnk",
+    "macro recorder": r"C:\Users\Public\Desktop\Macro Recorder.lnk",
+    "tencent meeting": r"C:\Users\Public\Desktop\Tencent Meeting.lnk",
+    "nvidia": r"C:\Users\Public\Desktop\NVIDIA.lnk",
+    "meta editor 5": r"C:\Users\Public\Desktop\MetaEditor 5.lnk",
+    "meta trader 5": r"C:\Users\Public\Desktop\MetaTrader 5.lnk",
+    "microsoft edge": r"C:\Users\Public\Desktop\Microsoft Edge.lnk",
+    "obs studio": r"C:\Users\Public\Desktop\OBS Studio.lnk",
+    "riot client": r"C:\Users\Public\Desktop\Riot Client.lnk",
+    "we chat": r"C:\Users\Public\Desktop\WeChat.lnk",
+    "a space for the unbound": r"C:\Users\Ozann\Desktop\A Space for the Unbound",
+    "bigbear win": r"C:\Users\Ozann\Desktop\bigbear-win",
+    "capcut": r"C:\Users\Ozann\Desktop\CapCut.lnk",
+    "internet download manager": r"C:\Users\Ozann\Desktop\Internet Download Manager.lnk",
+    "memu": r"C:\Users\Ozann\Desktop\MEmu.lnk",
+    "multi memu": r"C:\Users\Ozann\Desktop\Multi-MEmu.lnk",
+    "notion": r"C:\Users\Ozann\Desktop\Notion.lnk",
+    "person 1 chrome": r"C:\Users\Ozann\Desktop\Person 1 - Chrome.lnk",
+    "roblox player": r"C:\Users\Ozann\Desktop\Roblox Player.lnk",
+    "roblox studio": r"C:\Users\Ozann\Desktop\Roblox Studio.lnk",
+    # Menambahkan aplikasi lain sesuai kebutuhan
+}
 stop_speaking = False  # Global flag untuk menghentikan bicara
 
 
@@ -26,7 +54,18 @@ def chatbot_response(prompt):
     except Exception as e:
         return f"Error: {str(e)}"
 
-
+def open_application(command):
+    """Open application based on the command."""
+    app_name = command.strip().lower()
+    if app_name in app_paths:
+        try:
+            print(f"Membuka aplikasi {app_name}...")
+            os.startfile(app_paths[app_name])
+            speak(f"Membuka {app_name}.")
+        except Exception as e:
+            speak(f"Gagal membuka {app_name}: {str(e)}")
+    else:
+        speak(f"Aplikasi {app_name} tidak ditemukan dalam daftar.")
 def speak(text):
     """Fungsi berbicara menggunakan pyttsx3."""
     global stop_speaking
@@ -66,21 +105,11 @@ def handle_command(command):
         stop_speaking = True
         print("Berhenti berbicara...")
     elif "open" in command:
-        appname = command.replace("lexa open", "").strip()
-        try:
-            app_paths = {
-            "chrome": r"C:\Program Files\Google\Chrome\Application\chrome.exe",
-            "valorant": r"C:\Riot Games\Riot Client\RiotClientServices.exe",
-            "notepad": r"C:\Windows\System32\notepad.exe",
-            # Tambahkan aplikasi lainnya sesuai kebutuhan
-        }
-            # Ganti path aplikasi dengan path absolut yang benar
-            os.system(f'start {appname}')
-            speak(f"Membuka {appname}")
-        except Exception as e:
-            speak(f"Tidak dapat membuka {appname}: {str(e)}")
+        app_name = command.replace("open", "").strip()
+        open_application(app_name)
     elif "close" in command:
-        speak("Fitur menutup aplikasi belum didukung sepenuhnya.")
+        app_name = command.replace("close", "").strip()
+        speak(f"Menutup {app_name}.")
     elif "keluar" in command:
         speak("Sampai jumpa!")
         exit(0)
@@ -107,21 +136,11 @@ def main():
             stop_speaking = True
             print("Berhenti berbicara...")
         elif "open" in command:
-            appname = command.replace("lexa open", "").strip()
-            try:
-                app_paths = {
-                    "chrome": r"C:\Program Files\Google\Chrome\Application\chrome.exe",
-                    "valorant": r"C:\Riot Games\Riot Client\RiotClientServices.exe",
-                    "notepad": r"C:\Windows\System32\notepad.exe",
-            # Tambahkan aplikasi lainnya sesuai kebutuhan
-                }
-            # Ganti path aplikasi dengan path absolut yang benar
-                os.system(f'start {appname}')
-                speak(f"Membuka {appname}")
-            except Exception as e:
-                speak(f"Tidak dapat membuka {appname}: {str(e)}")
+            app_name = command.replace("open", "").strip()
+            open_application(app_name)
         elif "close" in command:
-            speak("Fitur menutup aplikasi belum didukung sepenuhnya.")
+            app_name = command.replace("close", "").strip()
+            speak(f"Menutup {app_name}.")
         elif "keluar" in command:
             speak("Sampai jumpa!")
             exit(0)
