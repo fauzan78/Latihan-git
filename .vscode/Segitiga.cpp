@@ -2,7 +2,7 @@
 using namespace std;
 int main(){
     int large;
-    cout << "masukkan jumlah panjang = ";
+    cout << "masukkan jumlah panjang : ";
     cin >> large;
     cout << "pola ke 1 \n" << endl;
     for ( int i = 1; i <= large; i++){
