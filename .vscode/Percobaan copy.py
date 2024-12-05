@@ -88,7 +88,7 @@ def recognize_speech():
         recognizer.adjust_for_ambient_noise(source, duration=1)
         print("Listening...")
         try:
-            audio = recognizer.listen(source, timeout=10)
+            audio = recognizer.listen(source, timeout=5, phrase_time_limit=10)
             command = recognizer.recognize_google(audio, language="id-ID")
             return command.lower()
         except sr.UnknownValueError:
