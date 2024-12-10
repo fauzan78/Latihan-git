@@ -5,7 +5,6 @@ import subprocess
 import openai
 
 # API Key OpenAI (ganti dengan kunci Anda)
-openai.api_key = ""
 
 # Inisialisasi Pyttsx3
 engine = pyttsx3.init()
